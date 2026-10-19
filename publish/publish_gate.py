@@ -157,8 +157,12 @@ def scan_push() -> list[Violation]:
         for obj in objects:
             bits = obj.split(" ", 1)
             if len(bits) != 2:
-                continue  # commit/tree objects carry no path
+                continue  # commit objects carry no path
             sha, path = bits
+            if path.endswith("/"):
+                continue  # directory tree entry, not a blob
+            if git("cat-file", "-t", sha).strip() != "blob":
+                continue  # only blobs carry scannable content
             size = int(git("cat-file", "-s", sha).strip())
             if size > allow["max_bytes"]:
                 violations.append(Violation(path, f"object exceeds max_bytes ({size})"))
