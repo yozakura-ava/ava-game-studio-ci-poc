@@ -1,0 +1,3 @@
+SYNTHETIC BACKGROUND ASSET (placeholder text representing bg_lab)
+Scene: neutral laboratory background, 1920x1080 target resolution.
+This file exists so the manifest validator has a real file to verify.

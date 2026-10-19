@@ -1,0 +1,50 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  gate:
+    name: Content sanitization gate (allowlist-first)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run publish gate (tree mode)
+        run: python3 publish/publish_gate.py --mode tree
+
+  test:
+    name: Unit tests (real, failing = red)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Syntax compile
+        run: python3 -m compileall -q src publish scripts
+      - name: Run tests
+        run: python3 -m unittest discover -s tests -v
+
+  build:
+    name: Package + upload bundle artifact
+    needs: [gate, test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build bundle
+        run: python3 scripts/package.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ava-game-studio-ci-poc-bundle
+          path: dist/
+          retention-days: 7

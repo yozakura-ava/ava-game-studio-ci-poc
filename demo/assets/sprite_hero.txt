@@ -1,0 +1,3 @@
+SYNTHETIC SPRITE ASSET (placeholder text representing sprite_hero)
+Character: generic hero silhouette, expression set: neutral / determined.
+This file exists so the manifest validator has a real file to verify.

@@ -1,0 +1,17 @@
+{
+  "title": "Synthetic Demo Content (PoC)",
+  "comment": "Fully synthetic, non-personal, non-NSFW placeholder content used only to exercise the manifest validator and packaging.",
+  "assets": [
+    { "path": "bg_lab.txt", "required": true, "state": "integrated" },
+    { "path": "sprite_hero.txt", "required": true, "state": "integrated" }
+  ],
+  "scenes": [
+    { "id": "scene_intro" },
+    { "id": "scene_choice" },
+    { "id": "scene_finale" }
+  ],
+  "endings": [
+    { "id": "end_brave", "scene": "scene_finale" },
+    { "id": "end_cautious", "scene": "scene_finale" }
+  ]
+}

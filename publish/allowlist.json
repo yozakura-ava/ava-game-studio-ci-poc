@@ -1,0 +1,16 @@
+{
+  "comment": "Allowlist-first publishing manifest (PoC). Anything NOT matched here is blocked. Adding a new path type = visible, reviewable change.",
+  "paths": [
+    "README.md",
+    ".github/**",
+    "publish/**",
+    "scripts/**",
+    "src/**",
+    "tests/**",
+    "demo/**",
+    "docs/**"
+  ],
+  "explicit_files": ["Makefile", ".gitignore", "allowlist.json", "ci.yml", "publish/hooks/pre-push"],
+  "file_types": [".py", ".md", ".json", ".txt", ".yml", ".yaml", ".sh", ".example"],
+  "max_bytes": 1048576
+}

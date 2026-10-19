@@ -1,0 +1,5 @@
+#!/bin/sh
+# Publish gate — pre-push hook (PoC).
+# Sanitization MUST run before any push: this hook fails the push on any violation.
+DIR=$(git rev-parse --show-toplevel) || exit 1
+exec python3 "$DIR/publish/publish_gate.py" --mode push
